@@ -1,0 +1,101 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+          crossorigin="anonymous"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
+
+	<style>
+		body{
+            padding-top:80px;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            animation-name: shine;
+            animation-iteration-count: infinite;
+            animation-duration: 60s;
+            transition-delay: 5s;
+        }
+
+        @keyframes shine {
+
+            0%{
+                background-image: url("https://www.space.ca/wp-content/uploads/2015/04/JBH7b.jpg");
+            }
+            10%{
+                background-image: url("http://thelifepile.com/wp-content/uploads/2016/04/animation-compilation-e1436174018958.jpg");
+            }
+            20%{
+                background-image: url("https://tctechcrunch2011.files.wordpress.com/2014/03/popcorntime1.png?w=1279&h=727&crop=1");
+            }
+            30%{
+                background-image: url("https://www.hdwallpapers.in/walls/justice_league_2017_movie-wide.jpg");
+            }
+            40%{
+                background-image: url("https://news.marvel.com/wp-content/uploads/2016/09/5528464fad4c1.jpg");
+            }
+            50%{
+                background-image: url("https://foripadapps.com/wp-content/uploads/2017/09/Harry-Potter-Wallpaper-For-iPad-1920x1080-4.jpg");
+            }
+            60%{
+                background-image: url("https://hdwallsource.com/img/2014/8/narnia-30709-31430-hd-wallpapers.jpg");
+            }
+            70%{
+                background-image: url("https://images4.alphacoders.com/210/thumb-1920-210384.jpg");
+            }
+            80%{
+                background-image: url("https://wallpapercave.com/wp/liSX9D5.jpg");
+            }
+            90%{
+                background-image: url("https://jasonsmovieblog.files.wordpress.com/2015/03/avengrs.png");
+            }
+            100%{
+                background-image: url("https://i1.wp.com/wordofthenerdonline.com/wp-content/uploads/2017/09/04/Jurassic-World-wallpaper.jpg?resize=1320%2C659");
+            }
+        }
+
+        .container{
+            height: 400px;
+            width: 1000px;
+            background-color: #ffffff7c;
+            border-radius: 10px;
+            color: black;
+            box-shadow: 19px 20px 20px 0px black;
+        }
+        
+	</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1><span class="fa fa-sign-in"></span> Login</h1>
+        <!-- show any messages that come back with authentication -->
+        <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+        <% } %>
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+        </form>
+        <hr>
+        <p>Need an account? <a href="/signup" style="color: darkblue">Signup</a></p>
+        <p>Or go <a href="/" style="color: darkblue">home</a>.</p>
+    </div>
+</div>
+
+</body>
+</html>

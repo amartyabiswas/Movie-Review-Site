@@ -1,0 +1,49 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+
+		body {
+            padding-top:80px;
+            background-color: black;
+        }
+
+        .jumbotron:hover{
+            background-color: black;
+            transition: 1s;
+            color: white;
+        }
+
+	</style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heading">
+            <h3 style="display: inline; font-family: 'Old English Text MT'; color: white">Powered By </h3>
+            <img height="75" width="75" src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Tmdb-312x276-logo.png">
+            <h3></h3>
+        </div><br>
+        <div class="jumbotron text-center" onmouseover="stext">
+            <h1 style="font-family: 'Times New Roman'"><span class="fa fa-lock"></span> The Movie Review Site</h1>
+
+            <p style="font-family: 'Times New Roman'">Login or Register with:</p>
+
+            <a href="/login" class="btn btn-default" style="font-family: 'Times New Roman'; font-size: 18px"><span class="fa fa-user"></span> Login</a>&nbsp;
+            <a href="/signup" class="btn btn-default" style="font-family: 'Times New Roman'; font-size: 18px"><span class="fa fa-user"></span> Signup</a>
+        </div>
+        <div class="footer" align="right">
+            <p style="color: white; font-size: 22px; font-family: 'Monotype Corsiva'">
+                - Developed by Amartya Biswas
+                <br>
+                Copyright <i class="fa fa-copyright" style="color: white; font-size: 19px"></i> 2018@titil
+            </p>
+        </div>
+    </div>
+</body>
+</html>

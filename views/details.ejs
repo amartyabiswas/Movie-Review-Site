@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Movies</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <style>
+        body{
+            padding-top:40px;
+            word-wrap:break-word;
+            background-color: #201f1f;
+            z-index: 99;
+        }
+        .d-block {
+            border-radius: 10px;
+        }
+        .navbar-nav{
+            padding-left: 65%;
+        }
+        .secondContainer{
+            padding-left: 55px;
+            padding-right: 45px;
+        }
+        #h1{
+            font-family:'Kaushan Script';
+            color: lightblue;
+            display: inline
+        }
+        #h1:hover{
+            letter-spacing: 2px;
+            font-size: 37px;
+            transition: .6s;
+            color: #2980b9;
+        }
+        #h2{
+            font-size: 45px;
+            font-family: 'Oswald';
+            color:#2ecc71;
+        }
+        #h2:hover{
+            letter-spacing: 2px;
+            font-size: 50px;
+            transition: .6s;
+            color: #f1c40f;
+        }
+        .card{
+            margin-right: 20px;
+            width: 18rem;
+            display: inline-block;
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card{
+            margin-right: 20px;
+            margin-bottom: 15px;
+            width: 18rem;
+            display: inline-block;
+        }
+
+        #background-overlay, #background-image {
+            top: 0px;
+            height: 620px;
+        }
+
+        #background-overlay{
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 6;
+            width: 100%;
+            background: -moz-linear-gradient(top,rgba(29,29,29,0.65) 0,rgba(29,29,29,1) 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(29,29,29,0.5)),color-stop(100%,rgba(29,29,29,1)));
+            background: -webkit-linear-gradient(top,rgba(29,29,29,0.65) 0,rgba(29,29,29,1) 100%);
+            background: -o-linear-gradient(top,rgba(29,29,29,0.65) 0,rgba(29,29,29,1) 100%);
+            background: -ms-linear-gradient(top,rgba(29,29,29,0.65) 0,rgba(29,29,29,1) 100%);
+            background: linear-gradient(to bottom,rgba(29,29,29,0.65) 0,rgba(29,29,29,1) 100%);
+        }
+        #background-image{
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+        }
+
+        .container{
+            position: relative;
+            z-index: 7;
+            margin: 0 auto;
+            color: white;
+        }
+        .firstClass{
+            padding-left: 40px;
+        }
+        .secondClass{
+            padding-top: 20px;
+        }
+        .video-frame{
+            padding-left: 110px;
+        }
+
+    </style>
+</head>
+<body>
+<% var poster = 'https://image.tmdb.org/t/p/w1280' + Movie.poster_path %>
+<div id="background-image" style="background: url(<%= poster %>) no-repeat center center; background-size: cover; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover;"></div>
+<div id="background-overlay"></div>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar navbar-light">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Tmdb-312x276-logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+        &nbsp;&nbsp;<h1 class="name" style="color: white">TMRS.db</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-size: 19px">
+                <a class="nav-item nav-link active" href="/profile" style="color: white">Home</a>
+                <a class="nav-item nav-link" href="/browse" style="color: white">Browse</a>
+                <a class="nav-item nav-link" href="/favourites" style="color: white">Favourites</a>
+                <a class="nav-item nav-link" href="/logout" style="color: white">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="card" style="width: 18rem; display: inline-block">
+        <% Movie.poster_path = 'https://image.tmdb.org/t/p/w500' +Movie.poster_path %>
+        <img class="card-img-top" src="<%= Movie.poster_path %>" alt="Card image cap">
+    </div>
+    <div style="display: inline" class="firstClass">
+        <div style="display: inline; position: absolute; padding-top: 40px">
+            <div>
+                <h1><%= Movie.original_title %></h1>
+            </div>
+            <br>
+            <div>
+                <% var date = Movie.release_date.substring(0,4)%>
+                <h3>
+                    <%=date%><br>
+                    <%= Movie.genres[0].name %> / <%= Movie.genres[1].name %> / <%= Movie.genres[2].name %>
+                </h3>
+            </div>
+            <br>
+            <div>
+                <h6>Runtime : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=Movie.runtime%> Minutes</h6>
+            </div>
+            <div>
+                <h6>IMDb Rating : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Movie.vote_average %>/10</h6>
+            </div>
+            <div>
+                <h6>Likes : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= Movie.vote_count %></h6>
+            </div>
+            <br>
+            <div>
+                <i class="fa fa-heart" aria-hidden="true" style="color: deeppink; font-size: 30px">&nbsp;&nbsp;&nbsp;&nbsp;<button id="fav" type="button" class="btn btn-primary"><a href="/fav/<%= Movie.id %>" style="color: white">Add to Favourites</a></button></i>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div style="display: inline-block" class="secondClass">
+        <div class="col-lg-12">
+            <% var obj = Credit.crew.find(o => o.job === 'Director') %>
+            <div class="credit-item">
+                <h4 style="display: inline">Director :</h4>
+                <span><%= obj.name %></span>
+            </div>
+        </div>
+        <br>
+        <div class="col-lg-12">
+            <div class="credit-item">
+                <h4 class="inline">Stars:</h4>
+                <% var first = 'https://image.tmdb.org/t/p/w92' + Credit.cast[0].profile_path %>
+                <% var second = 'https://image.tmdb.org/t/p/w92' + Credit.cast[1].profile_path %>
+                <% var third = 'https://image.tmdb.org/t/p/w92' + Credit.cast[2].profile_path %>
+                <% var fourth = 'https://image.tmdb.org/t/p/w92' + Credit.cast[3].profile_path %>
+
+                <span>
+                    <img src="<%= first %>" style="border-radius: 100%">&nbsp;&nbsp;
+                    <img src="<%= second %>" style="border-radius: 100%">&nbsp;&nbsp;
+                    <img src="<%= third %>" style="border-radius: 100%">&nbsp;&nbsp;
+                    <img src="<%= fourth %>"style="border-radius: 100%">&nbsp;&nbsp;
+                </span>
+                <br>
+                <span>
+                    <%= Credit.cast[0].name %>&nbsp;&nbsp;
+                    <%= Credit.cast[1].name %>&nbsp;&nbsp;
+                    <%= Credit.cast[2].name %>&nbsp;&nbsp;
+                    <%= Credit.cast[3].name %>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="video-frame" style="display: inline">
+        <div style="display: inline; position: absolute;">
+            <iframe class="youtube" src="https://www.youtube.com/embed/<%= Video.results[0].key %>" allowfullscreen="" style="width: 550px; height: 312px"></iframe>
+        </div>
+    </div>
+    <br><br><br>
+
+    <div class="reviews">
+        <div style="display: inline-block; width: 500px">
+            <h3>Overview</h3>
+            <p>
+                <%=Movie.overview %>
+            </p>
+        </div>
+    </div>
+    <br><br>
+    <div>
+        <h3 style="font-family: 'Kaushan Script'" align="center">Movies Recommended for You...</h3><br>
+        <div class="recommendation" align="center">
+        <span class="card" style="width: 12rem; background-color: #201f1f; border: none; display: inline-block">
+            <% var hey = 'https://image.tmdb.org/t/p/w500' + Recommend.results[0].poster_path %>
+            <img class="card-img-top" src="<%= hey %>" alt="Card image cap">
+            <p style="color: white; font-family: 'Kaushan Script'" align="center"><%= Recommend.results[0].title.substring(0,24) %></p>
+        </span>
+            <span class="card" style="width: 12rem;background-color: #201f1f; border: none; display: inline-block">
+                <% var heys = 'https://image.tmdb.org/t/p/w500' + Recommend.results[1].poster_path %>
+                <img class="card-img-top" src="<%= heys %>" alt="Card image cap">
+            <p style="color: white; font-family: 'Kaushan Script'" align="center"><%= Recommend.results[1].title.substring(0,24) %></p>
+        </span>
+            <span class="card" style="width: 12rem;background-color: #201f1f; border: none; display: inline-block">
+                <% var heywe = 'https://image.tmdb.org/t/p/w500' + Recommend.results[2].poster_path %>
+                <img class="card-img-top" src="<%= heywe %>" alt="Card image cap">
+            <p style="color: white; font-family: 'Kaushan Script'" align="center"><%= Recommend.results[2].title.substring(0,24) %></p>
+        </span>
+            <span class="card" style="width: 12rem;background-color: #201f1f; border: none; display: inline-block">
+                <% var heyfi = 'https://image.tmdb.org/t/p/w500' + Recommend.results[3].poster_path %>
+                <img class="card-img-top" src="<%= heyfi %>" alt="Card image cap">
+            <p style="color: white; font-family: 'Kaushan Script'" align="center"><%= Recommend.results[3].title.substring(0,24) %></p>
+        </span>
+            <span class="card" style="width: 12rem;background-color: #201f1f; border: none; display: inline-block">
+                <% var herry = 'https://image.tmdb.org/t/p/w500' + Recommend.results[4].poster_path %>
+                <img class="card-img-top" src="<%= herry %>" alt="Card image cap">
+            <p style="color: white; font-family: 'Kaushan Script'" align="center"><%= Recommend.results[4].title.substring(0,24) %></p>
+        </span>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+</body>
+</html>
+

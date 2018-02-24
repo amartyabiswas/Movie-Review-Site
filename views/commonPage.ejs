@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Movies</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <style>
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: beige;
+            min-width: 140px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            font-family: Oswald;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        body{
+            padding-top:40px;
+            word-wrap:break-word;
+            background-color: #FF5722;
+        }
+        .d-block {
+            border-radius: 10px;
+        }
+        .navbar-nav{
+            padding-left: 65%;
+        }
+        .secondContainer{
+            padding-left: 55px;
+            padding-right: 45px;
+        }
+        #h1{
+            font-family:'Kaushan Script';
+            color: lightblue;
+            display: inline
+        }
+        #h1:hover{
+            letter-spacing: 2px;
+            font-size: 37px;
+            transition: .6s;
+            color: #2980b9;
+        }
+        #h2{
+            font-size: 45px;
+            font-family: 'Kaushan Script';
+            color:#2ecc71;
+        }
+        #h2:hover{
+            letter-spacing: 2px;
+            font-size: 50px;
+            transition: .6s;
+            color: #f1c40f;
+        }
+        .card{
+            margin-right: 20px;
+            width: 18rem;
+            display: inline-block;
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card{
+            margin-right: 20px;
+            margin-bottom: 15px;
+            width: 18rem;
+            display: inline-block;
+        }
+        #timer{
+            height: 40px;
+            width: 108px;
+            padding-top: 3px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #FF5722">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Tmdb-312x276-logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+        &nbsp;&nbsp;<h1 class="name" style="color: #f1c40f">TMRS.db</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" style="font-size: 19px">
+                <a class="nav-item nav-link active" href="/profile">Home</a>
+                <div class="dropdown">
+                    <a class="nav-item nav-link" href="/browse">Browse</a>
+                    <div class="dropdown-content">
+                        <ul type="none">
+                            <li><a href="/latest">Latest</a></li>
+                            <li><a href="/popular">Popular</a></li>
+                            <li><a href="/rating">Top Rated</a></li>
+                            <li><a href="/money">Box Office</a></li>
+                            <li><a href="/oldest">Oldest</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a class="nav-item nav-link" href="/favourites">Favourites</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="col-sm-12 col-sm-offset-6">
+        <!-- Search FORM -->
+        <form action="/search" method="post">
+            <div class="form-group" style="display: flex" align="center">
+                <input name="searchBox" type="text" class="form-control" placeholder="Search" style="display: inline; font-family: 'Kaushan Script'; font-size: 24px">&nbsp;&nbsp;&nbsp;
+                <button type="submit" name="btn" class="btn btn-primary btn-lg">Search</button>
+            </div>
+        </form>
+    </div>
+    <form method="post" action="/discover">
+        <div class="form-group" style="display:flex">
+            <p style="font-size: 30px; font-family: 'Kaushan Script'; display: inline">Search by Genre:</p>
+            <select class="form-control" name="genre" style="display: inline; font-family: 'Kaushan Script'">
+                <option>Action</option>
+                <option>Adventure</option>
+                <option>Animation</option>
+                <option>Comedy</option>
+                <option>Crime</option>
+                <option>Documentary</option>
+                <option>Drama</option>
+                <option>Family</option>
+                <option>Fantasy</option>
+                <option>Horror</option>
+                <option>History</option>
+                <option>Musical</option>
+                <option>Mystrey</option>
+                <option>War</option>
+                <option>Sci-Fi</option>
+                <option>Romance</option>
+                <option>Western</option>
+            </select>&nbsp;&nbsp;&nbsp;
+            <button type="submit" id="timer" name="disc" class="btn btn-success btn-lg">Discover</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<!--Div for the Discovered material searched according to the genre....-->
+<div class="secondContainer" style="display:inline-block">
+    <h1 id="h2" align="center">It's Clobbering Time!!</h1><br>
+    <% movieData.results.forEach(function(movie){ %>
+    <div class="card">
+        <% movie.poster_path = 'https://image.tmdb.org/t/p/w1280' +movie.poster_path %>
+        <img class="card-img-top" src="<%= movie.poster_path %>" alt="Card image cap">
+        <div class="card-body">
+            <% var title= movie.title.substring(0,20)%>
+            <h5 class="card-title"><%=title %>
+                <span>
+                    <h6 style="display: inline; text-align: right" align="right"><%= movie.vote_average %><i class="fa fa-star" aria-hidden="true"></i></h6>
+                </span>
+            </h5>
+            <% var date= movie.release_date.substring(0,4) %>
+            <h6><i class="fa fa-calendar" aria-hidden="true">&nbsp;<%= date %></i></h6>
+            <% var details= movie.overview.substring(0,80) %>
+            <p class="card-text"><%= details %>....</p>
+            <a href="/details/<%= movie.id %>" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+    <% }); %>
+</div>
+
+</body>
+</html>
