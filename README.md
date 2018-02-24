@@ -31,3 +31,8 @@
 ![screenshot 69](https://user-images.githubusercontent.com/31181068/36628049-ef313f6c-1971-11e8-8cd1-8fb356ce2f65.png)
 
 ![screenshot 70](https://user-images.githubusercontent.com/31181068/36628050-f13c7812-1971-11e8-999b-5cafd1d5e8d1.png)
+
+## Copyright
+```
+This project has been made by Amartya Biswas and all rights reserved @ Amartya.
+```
